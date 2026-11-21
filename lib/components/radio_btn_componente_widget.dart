@@ -53,7 +53,7 @@ class _RadioBtnComponenteWidgetState extends State<RadioBtnComponenteWidget> {
       width: 100.0,
       height: 66.79,
       decoration: BoxDecoration(
-        color: AppTheme.of(context).secondaryBackground,
+        color: AppTheme.of(context).alternate,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,

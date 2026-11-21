@@ -352,7 +352,7 @@ class _GRMembrosListaChamadaRadiosWidgetState
                 height: 50.0,
                 margin: EdgeInsets.only(bottom: 12.0),
                 decoration: BoxDecoration(
-                  color: AppTheme.of(context).secondaryBackground,
+                  color: AppTheme.of(context).alternate,
                 ),
                 child: AppButton(
                   onPressed: () async {
