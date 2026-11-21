@@ -124,6 +124,7 @@ class _GRMembrosListaChamadaRadiosWidgetState
         ),
         body: SafeArea(
           top: true,
+          bottom: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -228,124 +229,128 @@ class _GRMembrosListaChamadaRadiosWidgetState
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 680.0,
-                decoration: BoxDecoration(
-                  color: AppTheme.of(context).alternate,
-                ),
-                child: FutureBuilder<List<VwGrMembrosRow>>(
-                  future: VwGrMembrosTable().queryRows(
-                    queryFn: (q) => q
-                        .eqOrNull(
-                          'gr_id',
-                          widget!.recebeIdGRplista?.id,
-                        )
-                        .eqOrNull(
-                          'ativo',
-                          true,
-                        ),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppTheme.of(context).alternate,
                   ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              AppTheme.of(context).primary,
+                  child: FutureBuilder<List<VwGrMembrosRow>>(
+                    future: VwGrMembrosTable().queryRows(
+                      queryFn: (q) => q
+                          .eqOrNull(
+                            'gr_id',
+                            widget!.recebeIdGRplista?.id,
+                          )
+                          .eqOrNull(
+                            'ativo',
+                            true,
+                          ),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<VwGrMembrosRow> listMembrosdoGRVwGrMembrosRowList =
-                        snapshot.data!;
+                        );
+                      }
+                      List<VwGrMembrosRow> listMembrosdoGRVwGrMembrosRowList =
+                          snapshot.data!;
 
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listMembrosdoGRVwGrMembrosRowList.length,
-                      itemBuilder: (context, listMembrosdoGRIndex) {
-                        final listMembrosdoGRVwGrMembrosRow =
-                            listMembrosdoGRVwGrMembrosRowList[
-                                listMembrosdoGRIndex];
-                        return Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment:
-                                (AppCrossAxisAlignment.center).flutterValue,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    valueOrDefault<String>(
-                                      listMembrosdoGRVwGrMembrosRow.nome,
-                                      'Nome',
-                                    ),
-                                    style: AppTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listMembrosdoGRVwGrMembrosRowList.length,
+                        itemBuilder: (context, listMembrosdoGRIndex) {
+                          final listMembrosdoGRVwGrMembrosRow =
+                              listMembrosdoGRVwGrMembrosRowList[
+                                  listMembrosdoGRIndex];
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment:
+                                  (AppCrossAxisAlignment.center).flutterValue,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      valueOrDefault<String>(
+                                        listMembrosdoGRVwGrMembrosRow.nome,
+                                        'Nome',
+                                      ),
+                                      style: AppTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle: AppTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                            ),
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                             fontStyle: AppTheme.of(context)
                                                 .bodyMedium
                                                 .fontStyle,
                                           ),
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle: AppTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment:
-                                      (AppCrossAxisAlignment.end).flutterValue,
-                                  textBaseline: TextBaseline.alphabetic,
-                                  children: [
-                                    wrapWithAppModel(
-                                      model: _model.radioBtnComponenteModels
-                                          .getModel(
-                                        listMembrosdoGRVwGrMembrosRow
-                                            .grMembroId!
-                                            .toString(),
-                                        listMembrosdoGRIndex,
-                                      ),
-                                      updateCallback: () => safeSetState(() {}),
-                                      child: RadioBtnComponenteWidget(
-                                        key: Key(
-                                          'Keyp5t_${listMembrosdoGRVwGrMembrosRow.grMembroId!.toString()}',
-                                        ),
-                                        recebeMembroId:
-                                            listMembrosdoGRVwGrMembrosRow,
-                                      ),
                                     ),
-                                  ].divide(SizedBox(height: 8.0)),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        (AppCrossAxisAlignment.end)
+                                            .flutterValue,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      wrapWithAppModel(
+                                        model: _model.radioBtnComponenteModels
+                                            .getModel(
+                                          listMembrosdoGRVwGrMembrosRow
+                                              .grMembroId!
+                                              .toString(),
+                                          listMembrosdoGRIndex,
+                                        ),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: RadioBtnComponenteWidget(
+                                          key: Key(
+                                            'Keyp5t_${listMembrosdoGRVwGrMembrosRow.grMembroId!.toString()}',
+                                          ),
+                                          recebeMembroId:
+                                              listMembrosdoGRVwGrMembrosRow,
+                                        ),
+                                      ),
+                                    ].divide(SizedBox(height: 8.0)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
               Container(
                 width: 100.0,
                 height: 50.0,
+                margin: EdgeInsets.only(bottom: 12.0),
                 decoration: BoxDecoration(
                   color: AppTheme.of(context).secondaryBackground,
                 ),
