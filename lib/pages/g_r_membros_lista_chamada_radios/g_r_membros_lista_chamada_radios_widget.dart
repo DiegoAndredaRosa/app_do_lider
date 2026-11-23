@@ -278,7 +278,7 @@ class _GRMembrosListaChamadaRadiosWidgetState
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 16.0, 8.0),
+                                    8.0, 12.0, 16.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment:

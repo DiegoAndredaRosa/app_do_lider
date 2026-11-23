@@ -51,7 +51,6 @@ class _RadioBtnComponenteWidgetState extends State<RadioBtnComponenteWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: 100.0,
-      height: 66.79,
       decoration: BoxDecoration(
         color: AppTheme.of(context).alternate,
       ),
